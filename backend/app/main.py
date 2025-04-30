@@ -3,12 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from .routers import base_router
 from .routers.listings import router as listings_router
 
-app = FastAPI(title="My Fullstack App")
+app = FastAPI(title="HouseHackCalc API")
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Frontend URL
+    allow_origins=["*"],  # In production, replace with specific origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -18,6 +18,6 @@ app.add_middleware(
 app.include_router(base_router)
 app.include_router(listings_router)
 
-@app.get("/")  
-async def root():  
-    return {"message": "Hello from FastAPI!"}  
+@app.get("/")
+async def root():
+    return {"message": "Welcome to HouseHackCalc API"}  

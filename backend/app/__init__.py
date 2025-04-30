@@ -1,0 +1,3 @@
+"""
+HouseHackCalc Backend Application
+""" 
