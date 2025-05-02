@@ -23,6 +23,9 @@ class ListingService:
     @staticmethod
     def _is_cache_valid(last_updated: datetime) -> bool:
         """Check if the cached data is still valid."""
+        # Ensure last_updated is timezone-aware
+        if last_updated.tzinfo is None:
+            last_updated = last_updated.replace(tzinfo=timezone.utc)
         return datetime.now(timezone.utc) - last_updated < ListingService.CACHE_EXPIRATION
 
     @staticmethod
@@ -33,7 +36,10 @@ class ListingService:
             "city": listing.get("city"),
             "state": listing.get("state"),
             "zipCode": listing.get("zipCode"),
-            "price": listing.get("price")
+            "price": listing.get("price"),
+            "bedrooms": listing.get("bedrooms"),
+            "bathrooms": listing.get("bathrooms"),
+            "squareFootage": listing.get("squareFootage")
         }
 
     @staticmethod
